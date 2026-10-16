@@ -185,7 +185,7 @@ local function applications()
   local rows = {}
   for _, app in ipairs(apps) do table.insert(rows, appRow(app, favorite[app.name] == true)) end
   if #rows == 0 then table.insert(rows, empty("search", tr("apps.empty"), tr("apps.empty_help"))) end
-  return ui.column({ flexGrow = 1, gap = 12 }, {
+  return ui.column({ flexGrow = 1, gap = 12, align = "stretch" }, {
     ui.row({ gap = 8, align = "center" }, {
       ui.input({ key = "app-search", value = search, placeholder = tr("apps.search"), flexGrow = 1,
         onChange = function(value) search = tostring(value) dirty = true end }),
@@ -195,7 +195,7 @@ local function applications()
         tooltip = tr("apps.favorites"), onClick = function() favoritesOnly = not favoritesOnly render() end }),
     }),
     label(tr("apps.help"), { fontSize = 11 }),
-    ui.scroll({ key = "apps-scroll", flexGrow = 1, gap = 6 }, rows),
+    ui.scroll({ key = "apps-scroll", flexGrow = 1, gap = 6, align = "stretch" }, rows),
   })
 end
 
@@ -325,7 +325,7 @@ render = function()
   elseif activeTab == "storage" then content = storage()
   elseif activeTab == "alerts" then content = alerts()
   else content = overview() end
-  panel.render(ui.column({ flexGrow = 1, gap = 14, padding = 16 }, {
+  panel.render(ui.column({ flexGrow = 1, gap = 14, padding = 16, align = "stretch" }, {
     ui.row({ gap = 12, align = "center" }, {
       ui.column({ padding = 10, radius = 12, fill = "primary/0.12" }, {
         ui.glyph({ name = "server", size = 25, color = "primary" }),

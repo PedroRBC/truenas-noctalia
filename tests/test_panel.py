@@ -80,6 +80,17 @@ update()
 assert(#appRows()==1 and appRows()[1].props.key=="app-jellyfin")
 ''')
 
+    def test_applications_containers_explicitly_stretch_horizontally(self):
+        self.run_case('''
+keyed("tab-apps").props.onClick()
+assert(tree.props.align=="stretch")
+local content=tree.children[#tree.children-1]
+assert(content.kind=="column" and content.props.align=="stretch")
+assert(keyed("apps-scroll").props.align=="stretch")
+assert(keyed("app-search").props.flexGrow==1)
+assert(appRows()[1].props.align=="center")
+''')
+
     def test_formatting_preserves_small_nonzero_values_and_missing_data(self):
         self.run_case('''
 assert(F.percent(0)=="0%" and F.percent(0.175)=="0.2%" and F.percent(0.01)=="<0.1%")
