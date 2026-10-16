@@ -1,0 +1,213 @@
+id = "PedroRBC/truenas"
+name = "TrueNAS Command Center"
+version = "1.0.0"
+plugin_api = 24
+author = "PedroRBC"
+license = "MIT"
+icon = "server"
+description = "Your NAS at a glance: live telemetry, storage health, alerts, and safe application controls over SSH."
+tags = ["bar", "panel", "service", "system", "network"]
+dependencies = ["python3", "ssh"]
+
+[[setting]]
+key = "server_name"
+type = "string"
+label_key = "settings.server_name.label"
+description_key = "settings.server_name.description"
+default = "TrueNAS"
+
+[[setting]]
+key = "ssh_host"
+type = "string"
+label_key = "settings.ssh_host.label"
+description_key = "settings.ssh_host.description"
+default = "192.168.99.114"
+
+[[setting]]
+key = "ssh_user"
+type = "string"
+label_key = "settings.ssh_user.label"
+description_key = "settings.ssh_user.description"
+default = "root"
+
+[[setting]]
+key = "ssh_port"
+type = "int"
+label_key = "settings.ssh_port.label"
+description_key = "settings.ssh_port.description"
+default = 22
+min = 1
+max = 65535
+
+[[setting]]
+key = "ssh_identity"
+type = "string"
+label_key = "settings.ssh_identity.label"
+description_key = "settings.ssh_identity.description"
+default = ""
+
+[[setting]]
+key = "web_url"
+type = "string"
+label_key = "settings.web_url.label"
+description_key = "settings.web_url.description"
+default = "http://192.168.99.114"
+
+[[setting]]
+key = "network_interface"
+type = "string"
+label_key = "settings.network_interface.label"
+description_key = "settings.network_interface.description"
+default = "br1"
+
+[[setting]]
+key = "refresh_interval"
+type = "int"
+label_key = "settings.refresh_interval.label"
+description_key = "settings.refresh_interval.description"
+default = 10
+min = 5
+max = 300
+
+[[setting]]
+key = "inventory_interval"
+type = "int"
+label_key = "settings.inventory_interval.label"
+description_key = "settings.inventory_interval.description"
+default = 60
+min = 15
+max = 900
+
+[[setting]]
+key = "request_timeout"
+type = "int"
+label_key = "settings.request_timeout.label"
+description_key = "settings.request_timeout.description"
+default = 20
+min = 10
+max = 60
+
+[[setting]]
+key = "action_timeout"
+type = "int"
+label_key = "settings.action_timeout.label"
+description_key = "settings.action_timeout.description"
+default = 120
+min = 30
+max = 180
+
+[[setting]]
+key = "stale_after"
+type = "int"
+label_key = "settings.stale_after.label"
+description_key = "settings.stale_after.description"
+default = 45
+min = 15
+max = 900
+
+[[setting]]
+key = "read_only"
+type = "bool"
+label_key = "settings.read_only.label"
+description_key = "settings.read_only.description"
+default = false
+
+[[setting]]
+key = "confirm_stop"
+type = "bool"
+label_key = "settings.confirm_stop.label"
+description_key = "settings.confirm_stop.description"
+default = true
+
+[[setting]]
+key = "confirm_restart"
+type = "bool"
+label_key = "settings.confirm_restart.label"
+description_key = "settings.confirm_restart.description"
+default = true
+
+[[setting]]
+key = "favorites"
+type = "string"
+label_key = "settings.favorites.label"
+description_key = "settings.favorites.description"
+default = "jellyfin, frigate, sonarr, radarr"
+
+[[setting]]
+key = "hidden_apps"
+type = "string"
+label_key = "settings.hidden_apps.label"
+description_key = "settings.hidden_apps.description"
+default = ""
+
+[[setting]]
+key = "notify_actions"
+type = "bool"
+label_key = "settings.notify_actions.label"
+description_key = "settings.notify_actions.description"
+default = true
+
+[[setting]]
+key = "show_temperature"
+type = "bool"
+label_key = "settings.show_temperature.label"
+description_key = "settings.show_temperature.description"
+default = true
+
+[[setting]]
+key = "show_network"
+type = "bool"
+label_key = "settings.show_network.label"
+description_key = "settings.show_network.description"
+default = true
+
+[[setting]]
+key = "show_arc"
+type = "bool"
+label_key = "settings.show_arc.label"
+description_key = "settings.show_arc.description"
+default = true
+
+[[widget]]
+id = "status"
+entry = "widget.luau"
+
+  [[widget.setting]]
+  key = "bar_metric"
+  type = "select"
+  label_key = "settings.bar_metric.label"
+  description_key = "settings.bar_metric.description"
+  default = "apps"
+  options = [
+    { value = "apps", label_key = "bar.apps" },
+    { value = "cpu", label_key = "bar.cpu" },
+    { value = "memory", label_key = "bar.memory" },
+    { value = "name", label_key = "bar.name" },
+    { value = "icon", label_key = "bar.icon" }
+  ]
+
+  [[widget.setting]]
+  key = "bar_color"
+  type = "select"
+  label_key = "settings.bar_color.label"
+  description_key = "settings.bar_color.description"
+  default = "primary"
+  options = [
+    { value = "primary", label_key = "colors.primary" },
+    { value = "secondary", label_key = "colors.secondary" },
+    { value = "tertiary", label_key = "colors.tertiary" },
+    { value = "on_surface", label_key = "colors.default" }
+  ]
+
+[[panel]]
+id = "manager"
+entry = "panel.luau"
+width = 820
+height = 660
+placement = "floating"
+position = "top_right"
+open_near_click = true
+
+[[service]]
+id = "backend"
+entry = "service.luau"

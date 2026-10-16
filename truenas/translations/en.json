@@ -1,0 +1,72 @@
+{
+  "title": "TrueNAS Command Center",
+  "tabs": { "overview": "Overview", "apps": "Applications", "storage": "Storage", "alerts": "Alerts" },
+  "actions": {
+    "start": "Start", "stop": "Stop", "restart": "Restart", "refresh": "Refresh",
+    "reconcile": "Check outcome", "cancel": "Cancel", "close": "Close",
+    "settings": "Connection & preferences", "web": "Open TrueNAS web interface", "open_app": "Open application"
+  },
+  "status": {
+    "connected": "Connected", "offline": "Disconnected", "stale": "Stale data",
+    "no_data": "Waiting for the first reading", "updated": "Updated {time}",
+    "loading": "Connecting securely over SSH…", "busy": "Working: {action} — waiting for TrueNAS to finish.",
+    "pending": "An earlier operation may still be running. Controls are locked until its outcome is known.",
+    "offline_help": "Check your SSH settings, key or agent, and known-hosts entry. Last successful readings are retained when the connection drops.",
+    "refresh_help": "Refresh to load the current server inventory.",
+    "section_unavailable": "{section}: unavailable",
+    "section_stale": "{section}: cached reading — not current",
+    "truncated": "This inventory was limited for responsiveness. Use the TrueNAS web interface for the full list.",
+    "read_only": "Read-only mode", "ssh": "SSH · verified host key"
+  },
+  "widget": { "hint": "Click: command center · Right-click: refresh · Middle-click: settings" },
+  "metrics": {
+    "cpu": "CPU utilization", "cpu_help": "Current system-wide load", "memory": "Memory used",
+    "temperature": "CPU temperature", "temperature_help": "Latest sensor reading",
+    "arc": "ZFS ARC cache", "arc_help": "Reclaimable cache · not added to RAM usage",
+    "network": "Network transfer", "network_help": "Receive ↓ / Send ↑ · rates appear after two readings",
+    "uptime": "Server uptime", "version": "TrueNAS version"
+  },
+  "apps": {
+    "running": "Running", "all": "All states", "other": "Not running", "search": "Search applications…",
+    "favorites": "Show favorites only", "update": "Update available", "empty": "No matching applications",
+    "empty_help": "Change your search, state filter, or configured favorite/hidden app lists.",
+    "help": "Play: start · Stop: stop · Refresh: restart without pulling newer images. Favorites are configured in settings."
+  },
+  "storage": {
+    "used": "{value} allocated", "available": "Available", "total": "Pool capacity", "empty": "No pools loaded",
+    "help": "Pool capacity is reported by ZFS. Dataset quotas and filesystem overhead may differ from these totals."
+  },
+  "alerts": { "empty": "No active alerts", "cached_empty": "No active alerts in the last successful reading", "help": "Dismissed historical alerts are excluded. Nothing is automatically dismissed or changed on your server." },
+  "confirm": {
+    "title": "{action} {app}?",
+    "stop": "This will interrupt the application and its active connections. The server and your other apps will remain running.",
+    "restart": "This will stop the app, wait for TrueNAS to confirm the stop, then start it again. There will be downtime. No image updates will be pulled."
+  },
+  "bar": { "apps": "Running / total apps", "cpu": "CPU percentage", "memory": "Memory percentage", "name": "Server name", "icon": "Icon only" },
+  "colors": { "primary": "Primary accent", "secondary": "Secondary accent", "tertiary": "Tertiary accent", "default": "Default text" },
+  "settings": {
+    "server_name": { "label": "Server display name", "description": "A friendly name for the panel and top-bar tooltip." },
+    "ssh_host": { "label": "SSH host", "description": "IP address or hostname only, not a URL or user@host. The server must already be trusted in SSH known_hosts." },
+    "ssh_user": { "label": "SSH user", "description": "An account authorized to run the required TrueNAS middleware operations. Root has full server privileges." },
+    "ssh_port": { "label": "SSH port", "description": "The SSH listener port on the NAS." },
+    "ssh_identity": { "label": "SSH identity file", "description": "Optional absolute or ~/ private-key path. Leave empty to use your SSH agent and normal identities. No key contents are stored here." },
+    "web_url": { "label": "Web interface URL", "description": "HTTP(S) address opened by the dashboard shortcut. Keep this in sync when changing the SSH host." },
+    "network_interface": { "label": "Network interface", "description": "One server interface, such as br1. Do not sum a bridge and its physical member or traffic will be double-counted." },
+    "refresh_interval": { "label": "Live statistics interval (seconds)", "description": "CPU, RAM, sensors and network refresh cadence. Failed connections back off automatically." },
+    "inventory_interval": { "label": "App/storage inventory interval (seconds)", "description": "Slower refresh cadence for application state, pools and alerts. Opening the panel forces a refresh." },
+    "request_timeout": { "label": "Read request timeout (seconds)", "description": "Deadline for SSH collection. Offline servers never block the desktop UI." },
+    "action_timeout": { "label": "App operation timeout (seconds)", "description": "Maximum wait for start/stop/restart jobs. A timeout is not a cancellation; unknown outcomes lock further controls." },
+    "stale_after": { "label": "Stale data threshold (seconds)", "description": "Disable management controls when readings are this old. Choose a value longer than your live refresh interval." },
+    "read_only": { "label": "Read-only mode", "description": "Disable every app mutation while retaining telemetry, inventory, and web shortcuts." },
+    "confirm_stop": { "label": "Confirm Stop", "description": "Show the application and destination before interrupting an app. Recommended." },
+    "confirm_restart": { "label": "Confirm Restart", "description": "Require explicit confirmation before stopping and starting an app. Recommended." },
+    "favorites": { "label": "Favorite applications", "description": "Comma-separated exact app names. Favorites sort first and can be filtered using the star button." },
+    "hidden_apps": { "label": "Hidden applications", "description": "Comma-separated exact app names to omit from the app list. This is a display preference, not an access-control boundary." },
+    "notify_actions": { "label": "App operation notifications", "description": "Show a desktop notification when an app operation succeeds, fails, or has an unknown outcome." },
+    "show_temperature": { "label": "Show CPU temperature", "description": "Hide this card if your server has no supported temperature sensor." },
+    "show_network": { "label": "Show network transfer", "description": "Display receive/send rates for the selected server interface." },
+    "show_arc": { "label": "Show ZFS ARC cache", "description": "Display the cache separately; RAM used is total minus available memory." },
+    "bar_metric": { "label": "Top-bar reading", "description": "Choose which compact statistic appears beside the server icon." },
+    "bar_color": { "label": "Top-bar accent", "description": "Use a semantic Noctalia palette color. Automatically follows light/dark theme changes." }
+  }
+}
